@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="hibernate.connection.password">password284</property>
+		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=hibernateDB;trustServerCertificate=true</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2016Dialect</property>
+        
+     
+	    <!-- 後面學到 currentSession() 再打開 必須設定下列屬性 -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- 是否在 console 顯示經由 hibernate 產生的 SQL 指令 -->
+		<property name="show_sql">true</property>
+
+		<!-- 上述 SQL 指令是否排版 -->
+		<property name="format_sql">true</property>
+
+		<!-- hibernate 內建 連線池 -->
+		<property name="connection.pool_size">2</property>
+
+		<!-- setting auto generate table: update/validate -->
+		<!-- <property name="hbm2ddl.auto">update</property> -->
+
+		<!-- source mapping in xml file -->
+		<mapping resource="tw/hibernatedemo/model/CompanyBean.hbm.xml" />
+
+		<!-- class mapping -->
+		<mapping class="tw.hibernatedemo.model.Department"/>
+        <mapping class="tw.hibernatedemo.model.InstructorDetail"/>
+        <mapping class="tw.hibernatedemo.model.Instructor"/>
+        <mapping class="tw.hibernatedemo.model.BookUsers"/>
+        <mapping class="tw.hibernatedemo.model.Books"/>
+        <mapping class="tw.hibernatedemo.model.Friends"/>
+        <mapping class="tw.hibernatedemo.model.MyGroup"/>
+        <mapping class="tw.hibernatedemo.model.Employee"/>
+        <mapping class="tw.hibernatedemo.model.MyMember"/>
+	</session-factory>
+</hibernate-configuration>

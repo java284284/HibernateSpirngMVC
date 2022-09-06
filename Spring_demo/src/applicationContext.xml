@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+  <context:annotation-config />
+  <context:component-scan base-package="tw.ispan.springdemo" />
+  <aop:aspectj-autoproxy />
+   
+   <bean id="teacher1" class="tw.ispan.springdemo.model.MathTeacher"></bean>
+   
+<!--    String string1 = new String("My Random String") -->
+   <bean id="string0" name="string1, string2" class="java.lang.String">
+     <constructor-arg value="My Random String"></constructor-arg>
+   </bean>
+   
+   <bean id="loginDao" class="tw.ispan.springdemo.model.LoginDao"></bean>
+   
+   <!--   constructor injection -->
+   <bean id="loginService" class="tw.ispan.springdemo.model.LoginService">
+      <constructor-arg ref="loginDao"></constructor-arg>
+   </bean>
+   
+   <!--   setter injection -->
+   <bean id="loginService2" class="tw.ispan.springdemo.model.LoginService">
+      <property name="loginDao" ref="loginDao"></property>
+   </bean>
+   
+   <bean id="car1" class="tw.ispan.springdemo.model.Car">
+      <constructor-arg index="0" value="1001"></constructor-arg>
+      <constructor-arg index="1" value="Model 3"></constructor-arg>
+      <constructor-arg index="2" value="Tesla"></constructor-arg>
+   </bean>
+   
+   <!--    Date date1 = new Date(); -->
+   <bean id="date1" class="java.util.Date"></bean>
+   
+   <bean id="car2" class="tw.ispan.springdemo.model.Car">
+     <constructor-arg type="java.util.Date" ref="date1"></constructor-arg>
+   </bean>
+   
+   <!-- p 命名空間做法 -->
+   <bean id="car3" class="tw.ispan.springdemo.model.Car"
+   p:carId="1002"
+   p:carName="911"
+   p:brand="Porsche"
+   p:releaseDate-ref="date1"
+   ></bean>
+   
+   
+   <bean id="javaBook"  class="tw.ispan.springdemo.model.BookBeanStaticFactory"
+   factory-method="getBook">
+   <constructor-arg value="1"></constructor-arg>
+   </bean>
+   
+   <bean id="mathBook"  class="tw.ispan.springdemo.model.BookBeanStaticFactory"
+   factory-method="getBook">
+   <constructor-arg value="2"></constructor-arg>
+   </bean>
+   
+<!--    <bean id="props"  class="org.springframework.beans.factory.config.PropertiesFactoryBean" -->
+<!--    factory-method="getBook"> -->
+<!--    <constructor-arg value="2"></constructor-arg> -->
+<!--    </bean> -->
+
+</beans>
